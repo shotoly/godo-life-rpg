@@ -89,3 +89,11 @@ func get_milestone_xp(difficulty: int) -> int:
 		5: 4000
 	}
 	return milestone_xp_table.get(difficulty, 0)
+	
+	# Ajouté à la fin de autoloads/XPTable.gd
+
+# Calcule l'XP requis pour passer AU niveau suivant (ex: pour passer au niv 2, on passe L=1)
+func get_xp_for_level(level: int) -> int:
+	# Formule : 10 * (L ^ 2.5)
+	var xp_required = 10 * pow(level, 2.5)
+	return int(xp_required)
