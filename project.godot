@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="lifeRPG2"
-run/main_scene="uid://c2cktlv1dtseq"
+run/main_scene="uid://chfxpcpfp4c45"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]
 
 XpTable="*res://autoloads/XPTable.gd"
+Gamedata="*res://autoloads/GameData.gd"
 
 [rendering]
 
