@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://dx7a34gjx0gjm"]
+
+[ext_resource type="Script" uid="uid://bm81m4mcm4i0w" path="res://scenes/QuestEditorRow.gd" id="1_42y55"]
+
+[node name="QuestEditorRow" type="HBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_42y55")
+
+[node name="ArcSelect" type="OptionButton" parent="."]
+layout_mode = 2
+
+[node name="FreqSelect" type="OptionButton" parent="."]
+layout_mode = 2
+
+[node name="RepsInput" type="SpinBox" parent="."]
+layout_mode = 2
+
+[node name="DescInput" type="LineEdit" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="IntensityInput" type="SpinBox" parent="."]
+layout_mode = 2
+
+[node name="XpLabel" type="Label" parent="."]
+layout_mode = 2
+
+[node name="DeleteButton" type="Button" parent="."]
+layout_mode = 2
