@@ -1,0 +1,95 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2cktlv1dtseq"]
+
+[ext_resource type="Script" uid="uid://d206fa02u5gb5" path="res://scenes/XPTest.gd" id="1_rheoh"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rheoh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 242.0
+offset_top = 51.0
+offset_right = 328.0
+offset_bottom = 191.0
+
+[node name="QuestTable" type="GridContainer" parent="VBoxContainer"]
+layout_mode = 2
+columns = 7
+
+[node name="Label6" type="Label" parent="VBoxContainer/QuestTable"]
+layout_mode = 2
+text = "Arck"
+
+[node name="Label" type="Label" parent="VBoxContainer/QuestTable"]
+layout_mode = 2
+text = "Fréquence"
+
+[node name="Label2" type="Label" parent="VBoxContainer/QuestTable"]
+layout_mode = 2
+text = "Répétition"
+
+[node name="Label3" type="Label" parent="VBoxContainer/QuestTable"]
+layout_mode = 2
+text = "Intensité"
+
+[node name="Label7" type="Label" parent="VBoxContainer/QuestTable"]
+layout_mode = 2
+text = "Quête"
+
+[node name="Label4" type="Label" parent="VBoxContainer/QuestTable"]
+layout_mode = 2
+text = "XP"
+
+[node name="Label5" type="Label" parent="VBoxContainer/QuestTable"]
+layout_mode = 2
+text = "Échecs"
+
+[node name="ArckCell" type="OptionButton" parent="VBoxContainer/QuestTable"]
+layout_mode = 2
+item_count = 12
+popup/item_0/text = "Arck I"
+popup/item_0/id = 0
+popup/item_1/text = "Arck II"
+popup/item_1/id = 1
+popup/item_2/text = "Arck III"
+popup/item_2/id = 2
+popup/item_3/id = 3
+popup/item_4/id = 4
+popup/item_5/id = 5
+popup/item_6/id = 6
+popup/item_7/id = 7
+popup/item_8/text = "Arck IX"
+popup/item_8/id = 8
+popup/item_9/text = "Arck X"
+popup/item_9/id = 9
+popup/item_10/text = "Arck XI"
+popup/item_10/id = 10
+popup/item_11/text = "Arck XII"
+popup/item_11/id = 11
+
+[node name="FreqCell" type="OptionButton" parent="VBoxContainer/QuestTable"]
+layout_mode = 2
+
+[node name="RepsCell" type="SpinBox" parent="VBoxContainer/QuestTable"]
+layout_mode = 2
+
+[node name="IntensityCell" type="SpinBox" parent="VBoxContainer/QuestTable"]
+layout_mode = 2
+
+[node name="QueteCell" type="LineEdit" parent="VBoxContainer/QuestTable"]
+layout_mode = 2
+
+[node name="XpCell" type="Label" parent="VBoxContainer/QuestTable"]
+layout_mode = 2
+
+[node name="FailsCell" type="SpinBox" parent="VBoxContainer/QuestTable"]
+layout_mode = 2
+
+[node name="AddQuestButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
