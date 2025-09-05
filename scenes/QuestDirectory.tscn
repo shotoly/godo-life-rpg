@@ -1,0 +1,62 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2cktlv1dtseq"]
+
+[ext_resource type="Script" uid="uid://d206fa02u5gb5" path="res://scenes/QuestDirectory.gd" id="1_7x5t0"]
+
+[node name="QuestDirectory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7x5t0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 242.0
+offset_top = 51.0
+offset_right = 328.0
+offset_bottom = 191.0
+
+[node name="QuestTable" type="GridContainer" parent="VBoxContainer"]
+layout_mode = 2
+columns = 7
+
+[node name="Label6" type="Label" parent="VBoxContainer/QuestTable"]
+layout_mode = 2
+text = "Arck"
+
+[node name="Label" type="Label" parent="VBoxContainer/QuestTable"]
+layout_mode = 2
+text = "Fréquence"
+
+[node name="Label2" type="Label" parent="VBoxContainer/QuestTable"]
+layout_mode = 2
+text = "Répétition"
+
+[node name="Label3" type="Label" parent="VBoxContainer/QuestTable"]
+layout_mode = 2
+text = "Intensité"
+
+[node name="Label7" type="Label" parent="VBoxContainer/QuestTable"]
+layout_mode = 2
+text = "Quête"
+
+[node name="Label4" type="Label" parent="VBoxContainer/QuestTable"]
+layout_mode = 2
+text = "XP"
+
+[node name="Label5" type="Label" parent="VBoxContainer/QuestTable"]
+layout_mode = 2
+text = "Échecs"
+
+[node name="AddQuestButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Noms des Arcs"
+
+[node name="ArcNameEditor" type="GridContainer" parent="VBoxContainer"]
+layout_mode = 2
+columns = 2
