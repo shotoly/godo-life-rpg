@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c2cktlv1dtseq" path="res://scenes/QuestDirectory.tscn" id="1_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://dbuptiil5ai4c" path="res://scenes/dashboard.tscn" id="2_rarhs"]
-[ext_resource type="PackedScene" uid="uid://b7s0a7awrfmpt" path="res://scenes/milestones.tscn" id="3_vcsgt"]
+[ext_resource type="PackedScene" uid="uid://b7s0a7awrfmpt" path="res://scenes/Milestones.tscn" id="3_vcsgt"]
 
 [node name="Control" type="Control"]
 layout_mode = 3

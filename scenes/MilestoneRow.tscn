@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://dx3wytg2lj8cq"]
+
+[ext_resource type="Script" uid="uid://dplj1si1u7lil" path="res://scenes/MilestoneRow.gd" id="1_t7j78"]
+
+[node name="MilestoneRow" type="HBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_t7j78")
+
+[node name="DescriptionInput" type="LineEdit" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DifficultyInput" type="SpinBox" parent="."]
+layout_mode = 2
+min_value = 1.0
+max_value = 5.0
+value = 1.0
+
+[node name="CompletedCheck" type="CheckBox" parent="."]
+layout_mode = 2
+
+[node name="XpLabel" type="Label" parent="."]
+layout_mode = 2

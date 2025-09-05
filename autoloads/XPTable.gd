@@ -76,3 +76,16 @@ func get_xp_net(freq: String, reps: int, intensity: int, fails: int) -> int:
 	var malus_pct: float = get_malus(freq, reps)
 	var penalty: float = base_xp * malus_pct * fails
 	return max(0, int(base_xp - penalty))
+
+# Ajouté à la fin de autoloads/XPTable.gd
+
+# Calcule l'XP pour un palier en fonction de sa difficulté
+func get_milestone_xp(difficulty: int) -> int:
+	var milestone_xp_table = {
+		1: 500,
+		2: 1000,
+		3: 1500,
+		4: 2500,
+		5: 4000
+	}
+	return milestone_xp_table.get(difficulty, 0)
