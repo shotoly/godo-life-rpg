@@ -1,0 +1,283 @@
+[gd_scene load_steps=6 format=3 uid="uid://c2kis3p0hwb2j"]
+
+[ext_resource type="Texture2D" uid="uid://b743i0m6b8kt6" path="res://image/tab quetes avec fond.png" id="1_cgujv"]
+[ext_resource type="LabelSettings" uid="uid://dqty00vv8irrk" path="res://test.tres" id="2_bpplx"]
+
+[sub_resource type="GDScript" id="GDScript_bpplx"]
+script/source = "extends Control
+@onready var gestion_des_quêtes = $TextureRect/Panel/gestion_des_quêtes
+@onready var arck_tab = $TextureRect/arck_tab
+
+var latest_arc_names: Array = []
+
+func on_arc_names_updated(names_array: Array):
+	# On met simplement à jour notre copie locale de la liste.
+	self.latest_arc_names = names_array
+	print(\"Liste des arcs reçue et mise à jour !\")
+
+var quest_table := {
+	\"Journalière\": {
+		1: { \"xp\": [25, 31, 38] },
+		2: { \"xp\": [20, 25, 30] },
+		3: { \"xp\": [17.5, 22, 26] },
+		4: { \"xp\": [15.625, 20, 23] },
+		5: { \"xp\": [14, 18, 21] },
+		6: { \"xp\": [12.5, 16, 19] },
+		7: { \"xp\": [11.25, 14, 17] },
+		8: { \"xp\": [10, 13, 15] },
+		9: { \"xp\": [8.75, 11, 13] },
+		10: { \"xp\": [8.125, 10, 12] }
+	},
+	\"Hebdomadaire\": {
+		1: { \"xp\": [100, 125, 150] },
+		2: { \"xp\": [80, 100, 120] },
+		3: { \"xp\": [70, 88, 105] },
+		4: { \"xp\": [62.5, 78, 94] },
+		5: { \"xp\": [56, 70, 84] },
+		6: { \"xp\": [50, 63, 75] },
+		7: { \"xp\": [45, 56, 68] },
+		8: { \"xp\": [40, 50, 60] },
+		9: { \"xp\": [35, 44, 53] },
+		10: { \"xp\": [32.5, 41, 49] }
+	},
+	\"Mensuelle\": {
+		1: { \"xp\": [400, 500, 600] },
+		2: { \"xp\": [350, 438, 525] },
+		3: { \"xp\": [300, 375, 450] },
+		4: { \"xp\": [250, 313, 375] },
+		5: { \"xp\": [220, 275, 330] },
+		6: { \"xp\": [200, 250, 300] },
+		7: { \"xp\": [185, 231, 278] },
+		8: { \"xp\": [172, 215, 258] },
+		9: { \"xp\": [160, 200, 240] },
+		10: { \"xp\": [150, 188, 225] }
+	},
+	\"Annuelle\": {
+		1: { \"xp\": [3000, 3750, 4500] },
+		2: { \"xp\": [1750, 2188, 2625] },
+		3: { \"xp\": [1333, 1666, 2000] },
+		4: { \"xp\": [1125, 1406, 1688] },
+		5: { \"xp\": [1000, 1250, 1500] },
+		6: { \"xp\": [900, 1125, 1350] },
+		7: { \"xp\": [814, 1018, 1221] },
+		8: { \"xp\": [750, 938, 1125] },
+		9: { \"xp\": [700, 875, 1050] },
+		10: { \"xp\": [650, 813, 975] }
+	},
+	\"Unique\": {
+		1: { \"xp\": [900, 1400, 2100] },
+		2: { \"xp\": [0, 0, 0] },
+		3: { \"xp\": [0, 0, 0] },
+		4: { \"xp\": [0, 0, 0] },
+		5: { \"xp\": [0, 0, 0] },
+		6: { \"xp\": [0, 0, 0] },
+		7: { \"xp\": [0, 0, 0] },
+		8: { \"xp\": [0, 0, 0] },
+		9: { \"xp\": [0, 0, 0] },
+		10: { \"xp\": [0, 0, 0] }
+	}
+}
+
+func _on_ligne_pressed() -> void:
+	var arckcell = OptionButton.new()
+	for arc_name in latest_arc_names:
+		arckcell.add_item(arc_name)
+
+	arckcell.add_item(\"Arc I\")
+	arckcell.add_item(\"Arc II\")
+	arckcell.add_item(\"Arc III\")
+	arckcell.add_item(\"Arc IV\")
+	arckcell.add_item(\"Arc V\")
+	arckcell.add_item(\"Arc VI\")
+	arckcell.add_item(\"Arc VII\")
+	arckcell.add_item(\"Arc VIII\")
+	arckcell.add_item(\"Arc IX\")
+	arckcell.add_item(\"Arc X\")
+	arckcell.add_item(\"Arc XI\")
+	arckcell.add_item(\"Arc XII\")
+	
+	var frequencecell = OptionButton.new()
+	frequencecell.add_item(\"Journalière\")
+	frequencecell.add_item(\"Hebdomadaire\")
+	frequencecell.add_item(\"Mensuelle\")
+	frequencecell.add_item(\"Annuelle\")
+	frequencecell.add_item(\"Unique\")
+	
+	var repcell = SpinBox.new()
+	repcell.min_value = 1
+	repcell.max_value = 10
+	repcell.value = 1
+	
+	var intensitecell = SpinBox.new()
+	intensitecell.min_value = 1
+	intensitecell.max_value = 3
+	intensitecell.value = 1
+	
+	var quetescell = LineEdit.new()
+	var xpcell = Label.new()
+	xpcell.add_theme_color_override(\"font_color\", Color.BLACK)
+
+	var nbfailcell = SpinBox.new()
+	var maluscell = Label.new()
+	
+	gestion_des_quêtes.add_child(arckcell)
+	gestion_des_quêtes.add_child(frequencecell)
+	gestion_des_quêtes.add_child(repcell)
+	gestion_des_quêtes.add_child(intensitecell)
+	gestion_des_quêtes.add_child(quetescell)
+	gestion_des_quêtes.add_child(xpcell)
+	gestion_des_quêtes.add_child(nbfailcell)
+	gestion_des_quêtes.add_child(maluscell)
+
+func _on_calcule_pressed() -> void:
+	var colonnes = gestion_des_quêtes.columns
+	var enfants = gestion_des_quêtes.get_child_count()
+	var lignes = ceil(int(enfants) / colonnes)
+	var frequence_data
+	var repetition_data : int
+	var xp_array
+	var intensite_xp : int
+	
+	for i in range(1, lignes):
+		for j in range(colonnes):
+			var index = i * colonnes + j
+			var cell = gestion_des_quêtes.get_child(index)
+			match j :
+				1 :
+					cell = gestion_des_quêtes.get_child(index)
+					frequence_data = cell.get_item_text(cell.selected)
+					print(frequence_data)
+				2 :
+					cell = gestion_des_quêtes.get_child(index)
+					repetition_data = cell.value
+					print(repetition_data)
+				3 :
+					cell = gestion_des_quêtes.get_child(index)
+					intensite_xp = cell.value -1
+					print(intensite_xp)
+		var xp_value = quest_table[frequence_data][repetition_data][\"xp\"][intensite_xp]
+		var index_xp = i * colonnes + 5
+		var cell_xp = gestion_des_quêtes.get_child(index_xp)
+		cell_xp.text = str(xp_value)
+
+func _on_control_arc_names_updated(names_array: Array) -> void:
+	pass # Replace with function body.
+"
+
+[sub_resource type="FontFile" id="FontFile_cusdl"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_usg71"]
+font = SubResource("FontFile_cusdl")
+font_color = Color(0, 0, 0, 1)
+
+[node name="gesion_des_quetes" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.00383212
+script = SubResource("GDScript_bpplx")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -12.9999
+offset_top = -0.0498173
+offset_right = -11.9999
+offset_bottom = -0.0498047
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.00110164
+texture = ExtResource("1_cgujv")
+
+[node name="Panel" type="VBoxContainer" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -346.143
+offset_top = 299.355
+offset_right = 377.857
+offset_bottom = 338.355
+grow_horizontal = 2
+
+[node name="gestion_des_quêtes" type="GridContainer" parent="TextureRect/Panel"]
+layout_mode = 2
+columns = 8
+
+[node name="Arck" type="Label" parent="TextureRect/Panel/gestion_des_quêtes"]
+layout_mode = 2
+text = "Arck"
+label_settings = SubResource("LabelSettings_usg71")
+
+[node name="frequence" type="Label" parent="TextureRect/Panel/gestion_des_quêtes"]
+layout_mode = 2
+text = "Fréquence"
+label_settings = ExtResource("2_bpplx")
+
+[node name="rep" type="Label" parent="TextureRect/Panel/gestion_des_quêtes"]
+layout_mode = 2
+text = "Répétition sur la période"
+label_settings = ExtResource("2_bpplx")
+
+[node name="Intensite" type="Label" parent="TextureRect/Panel/gestion_des_quêtes"]
+layout_mode = 2
+text = "Intensité"
+label_settings = ExtResource("2_bpplx")
+
+[node name="Quetes" type="Label" parent="TextureRect/Panel/gestion_des_quêtes"]
+layout_mode = 2
+text = "Quêtes"
+label_settings = ExtResource("2_bpplx")
+
+[node name="XP" type="Label" parent="TextureRect/Panel/gestion_des_quêtes"]
+layout_mode = 2
+text = "XP / Quête"
+label_settings = ExtResource("2_bpplx")
+
+[node name="Nbfail" type="Label" parent="TextureRect/Panel/gestion_des_quêtes"]
+layout_mode = 2
+text = "Nombre d'échecs"
+label_settings = ExtResource("2_bpplx")
+
+[node name="Malus" type="Label" parent="TextureRect/Panel/gestion_des_quêtes"]
+layout_mode = 2
+text = "Malus"
+label_settings = ExtResource("2_bpplx")
+
+[node name="ligne" type="Button" parent="TextureRect/Panel"]
+layout_mode = 2
+
+[node name="calcule" type="Button" parent="TextureRect"]
+layout_mode = 0
+offset_left = 415.328
+offset_top = 306.592
+offset_right = 477.328
+offset_bottom = 337.592
+text = "calcule"
+
+[node name="arck_tab" type="GridContainer" parent="TextureRect"]
+layout_mode = 0
+offset_left = 274.158
+offset_top = 308.75
+offset_right = 314.158
+offset_bottom = 348.75
+
+[node name="tab_Arck" type="Label" parent="TextureRect/arck_tab"]
+layout_mode = 2
+text = "Arck"
+label_settings = ExtResource("2_bpplx")
+
+[connection signal="pressed" from="TextureRect/Panel/ligne" to="." method="_on_ligne_pressed"]
+[connection signal="pressed" from="TextureRect/calcule" to="." method="_on_calcule_pressed"]
